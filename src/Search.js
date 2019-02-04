@@ -6,22 +6,32 @@ class Search extends Component {
 	constructor() {
 		super();
 		this.state = {
-			companyName: ''
+			type: '',
+			value: ''
 		};
 		this.onChange = this.onChange.bind(this);
 	}
 	
-	onChange(e) {
+	onChange(attribute, e) {
 		this.setState({
-			companyName: e.target.value
+			[attribute]: e.target.value
 		});
 	}
 
 	  render() {
 	    return (
 	    	<div>
-		    	<input type="text" value={this.state.companyName} onChange={this.onChange}/>
-		    	<EmpTable companyName={this.state.companyName}/>
+				<select value={this.state.type} onChange={(e)=>this.onChange('type', e)}>
+				    <option> </option>
+					<option> company </option>
+					<option> contact </option>
+					<option> country </option>
+				</select>
+				<input type="text" 
+					value={this.state.value} 
+					onChange={(e)=>this.onChange('value', e)}/>
+				<EmpTable 
+					value={this.state.value}/>
 	    	</div>
 	    )
 	  }

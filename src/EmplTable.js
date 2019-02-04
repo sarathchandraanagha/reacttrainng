@@ -8,6 +8,15 @@ import React, { Component } from 'react';
 	// var scope = {};
 //});
 
+const Employee = ({ employee }) => {  
+	return (
+		<tr>
+			<td>{ employee.company }</td>
+			<td>{ employee.contact} </td>
+			<td>{ employee.country} </td>
+		</tr>
+	);
+}
 
 class EmpTable extends Component {
 
@@ -27,9 +36,14 @@ class EmpTable extends Component {
 
  
  render() {
- 	const searchInput = this.props.companyName;
- 	const employees = this.state.employees.filter((employee)=> {
- 		return employee.company.toUpperCase().includes(searchInput.toUpperCase());
+	 //const searchInput = this.props.value;
+	 //const type = this.props.type;
+	const { value } = this.props;
+	const types = [ 'company', 'contact', 'country' ];
+	const employees = this.state.employees.filter((employee)=> {
+		const values = types.map((type) => employee[type].toUpperCase());
+		// ['VINOD', 'MARIA Anders', 'Germanuy']
+		return values.some((eachValue) => eachValue.includes(value.toUpperCase()));
  	});
  	return (<table>
 	  <tr>
@@ -39,11 +53,7 @@ class EmpTable extends Component {
 	  </tr> 
 	  {
 	  	employees.map((employee)=> {
-	  		return (<tr>
-	  				<td>{ employee.company }</td>
-	  				<td>{ employee.contact} </td>
-	  				<td>{ employee.country} </td>
-	  			</tr>)
+	  		return (<Employee key={employee.company} employee={employee}/>)
 	  	})
 	  }
     </table>);
