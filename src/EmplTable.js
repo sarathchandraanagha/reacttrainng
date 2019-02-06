@@ -1,5 +1,28 @@
 import React, { Component } from 'react';
 
+
+function add(a,b) {
+	var name = 'vinod';
+	this.x = function() {
+	
+	}
+}
+var obj = new add(1,2); // numbers, strings, boolean - primitive
+// { x: function() {} }
+var x = 10; // x - reference
+var y = x;  // y - reference
+y = 20;
+console.log(x,y); // 10, 20 // Immutation
+
+// [100,101,102,103]
+var obj1 = {
+	name: 'sarath'
+};
+var obj2 = obj1;
+obj2.name = 'vinod';
+obj2.name = 'sai';  // Mutattion
+console.log(obj1.name, obj2.name); // sarath, vinod
+
 // Local Scope - within a function - Controller - $scope
 // Global Scope - App access
 // app.controller("controll", function($scope){
@@ -37,7 +60,6 @@ class EmpTable extends Component {
  
  render() {
 	 //const searchInput = this.props.value;
-	 //const type = this.props.type;
 	const { value } = this.props;
 	const types = [ 'company', 'contact', 'country' ];
 	const employees = this.state.employees.filter((employee)=> {

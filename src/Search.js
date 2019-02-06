@@ -6,10 +6,25 @@ class Search extends Component {
 	constructor() {
 		super();
 		this.state = {
-			type: '',
 			value: ''
 		};
 		this.onChange = this.onChange.bind(this);
+	}
+
+	componentWillMount() {
+		console.log("Will Mount...")
+	}
+
+	componentDidMount() {
+		console.log("Did Mount...")
+	}
+
+	componentWillReceiveProps(nextstate) {
+		console.log("Component Will recieve props", nextstate)
+	}
+
+	componentWillUnmount() {
+		console.log("UnMount...")
 	}
 	
 	onChange(attribute, e) {
@@ -19,15 +34,13 @@ class Search extends Component {
 	}
 
 	  render() {
+		console.log("Render", this.props);
 	    return (
 	    	<div>
-				<select value={this.state.type} onChange={(e)=>this.onChange('type', e)}>
-				    <option> </option>
-					<option> company </option>
-					<option> contact </option>
-					<option> country </option>
-				</select>
-				<input type="text" 
+				<input 
+					id="search"
+					type="text" 
+					placeholder="Search"
 					value={this.state.value} 
 					onChange={(e)=>this.onChange('value', e)}/>
 				<EmpTable 

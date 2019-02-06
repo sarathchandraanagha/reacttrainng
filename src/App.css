@@ -14,3 +14,8 @@ td, th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+
+#search {
+  padding: 10px;
+  margin: 10px;
+}
