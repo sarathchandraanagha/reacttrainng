@@ -1,27 +1,38 @@
 import React, { Component } from 'react';
 
-
-function add(a,b) {
-	var name = 'vinod';
-	this.x = function() {
-	
-	}
+var arr = [1,2,3]; // [1,4,9] [2,3,4]
+function sqaureIt(element) {
+	return element*element;
 }
-var obj = new add(1,2); // numbers, strings, boolean - primitive
-// { x: function() {} }
-var x = 10; // x - reference
-var y = x;  // y - reference
-y = 20;
-console.log(x,y); // 10, 20 // Immutation
+function addIt(element) {
+	return element+1;
+}
 
-// [100,101,102,103]
-var obj1 = {
-	name: 'sarath'
-};
-var obj2 = obj1;
-obj2.name = 'vinod';
-obj2.name = 'sai';  // Mutattion
-console.log(obj1.name, obj2.name); // sarath, vinod
+//var square = arr.map(sqaureIt);
+//var addition = arr.map(addIt);
+
+Array.prototype.mapIt = function(fn) {
+	var endResult = [];
+	for(var i=0;i<this.length;i++) {
+		var result = fn(arr[i]);
+		endResult.push(result);
+	}
+	return endResult;
+}
+
+var square = arr.mapIt(sqaureIt);
+var addition = arr.mapIt(addIt);
+/*for(var i=0;i<arr.length;i++) {
+	var result = sqaureIt(arr[i]);
+	square.push(result);
+}
+var addition = [];
+for(var i=0;i<arr.length;i++) {
+	var result = addIt(arr[i]);
+	addition.push(result);
+}*/
+console.log(square);
+console.log(addition);
 
 // Local Scope - within a function - Controller - $scope
 // Global Scope - App access
