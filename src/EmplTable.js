@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-var arr = [1,2,3]; // [1,4,9] [2,3,4]
+var arr = [1,2,3]; // [1,4,9] [2,3,4] 
 function sqaureIt(element) {
 	return element*element;
 }
@@ -10,7 +10,7 @@ function addIt(element) {
 
 //var square = arr.map(sqaureIt);
 //var addition = arr.map(addIt);
-
+// push, pop, slice, splice, shift, unshift, every, forEach, map, ....
 Array.prototype.mapIt = function(fn) {
 	var endResult = [];
 	for(var i=0;i<this.length;i++) {
@@ -20,9 +20,13 @@ Array.prototype.mapIt = function(fn) {
 	return endResult;
 }
 
+// Array - map, filter, forEach, every, some etc... ES6
+// arr.map(function(element){}), arr.forEach(function(element){})
+
 var square = arr.mapIt(sqaureIt);
 var addition = arr.mapIt(addIt);
-/*for(var i=0;i<arr.length;i++) {
+/*var square = [];
+for(var i=0;i<arr.length;i++) {
 	var result = sqaureIt(arr[i]);
 	square.push(result);
 }
@@ -42,12 +46,40 @@ console.log(addition);
 	// var scope = {};
 //});
 
-const Employee = ({ employee }) => {  
+
+var a = function() {
+	return function b() {
+
+	}
+}
+var b = a();
+console.log(b);
+
+var a = () => {
+	return function b() {
+
+	} 
+}
+
+var c = () => () => {
+	
+}
+
+console.log(c())
+	
+
+const Hoc = (Wrapper) => ({ employee }) => {
+	const icon = employee.country === 'Canada' ? 'cross' : 'tick';
+	return (<Wrapper employee={employee} icon={icon}/>)
+}
+
+const Employee = ({ employee, icon }) => {  
 	return (
 		<tr>
-			<td>{ employee.company }</td>
+			<td>{ employee.company }</td> 
 			<td>{ employee.contact} </td>
 			<td>{ employee.country} </td>
+			<td>{ icon }</td>
 		</tr>
 	);
 }
@@ -59,7 +91,7 @@ class EmpTable extends Component {
 	this.state = {
  		employees: [
  			{ company: 'Vinod', contact:'Maria Anders', country: 'Germany' },
- 			{ company: 'Sarath', contact:'Francisco Chang', country: 'Mexico' },
+ 			{ company: 'Sarath', contact:'Francisco Chang', country: 'Canada' },
  			{ company: 'Naveen', contact:'Roland Mendel', country: 'Austria' },
  			{ company: 'Sai', contact:'Helen Bennett', country: 'UK' },
  			{ company: 'Chandra', contact:'Yoshi Tannamuri', country: 'Canada' }
@@ -83,10 +115,12 @@ class EmpTable extends Component {
 	    <th>Company</th>
 	    <th>Contact</th>
 	    <th>Country</th>
+		<th>Action</th>
 	  </tr> 
 	  {
 	  	employees.map((employee)=> {
-	  		return (<Employee key={employee.company} employee={employee}/>)
+			const ResultComponent = Hoc(Employee);
+	  		return (<ResultComponent key={employee.company} employee={employee}/>)
 	  	})
 	  }
     </table>);
