@@ -62,7 +62,7 @@ var a = () => {
 }
 
 var c = () => () => {
-	
+
 }
 
 console.log(c())
@@ -79,7 +79,7 @@ const Employee = ({ employee, icon }) => {
 			<td>{ employee.company }</td> 
 			<td>{ employee.contact} </td>
 			<td>{ employee.country} </td>
-			<td>{ icon }</td>
+			<td><button>{ icon }</button></td>
 		</tr>
 	);
 }
